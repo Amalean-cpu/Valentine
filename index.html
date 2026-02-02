@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 2;
+    }
+
+    img {
+      width: 260px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #ff2e63;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s;
+      position: absolute;
+    }
+
+    #yes {
+      background-color: #ff2e63;
+      color: white;
+      position: relative;
+    }
+
+    #no {
+      background-color: #999;
+      color: white;
+    }
+
+    /* PAGE YES */
+    .yes-page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .yes-page h1 {
+      font-size: 3em;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* CŒURS */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 24px;
+      color: #ff2e63;
+      animation: fall linear forwards;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="container" id="main">
+    <img src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif">
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <button id="yes" onclick="showYesPage()">Yes 💖</button>
+    <button id="no">No 💔</button>
+  </div>
+
+  <!-- PAGE YES -->
+  <div class="container yes-page" id="yesPage">
+    <img src="https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif">
+    <h1>YAAAY 💞</h1>
+    <p style="font-size:22px; color:#ff2e63;">
+      You just made my heart very happy 💕<br>
+      Happy Valentine’s Day 🌹
+    </p>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 80);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    function showYesPage() {
+      document.getElementById("main").style.display = "none";
+      const yesPage = document.getElementById("yesPage");
+      yesPage.style.display = "flex";
+
+      startHearts();
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
